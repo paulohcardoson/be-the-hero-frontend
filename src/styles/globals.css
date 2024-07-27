@@ -2,32 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #f0f0f5;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.container {
+  width: 100%;
+  padding: 0 5rem;
+  max-width: 1100px;
+}
+
+@layer components {
+  /* Login page */
+  .login-page-container {
+    display: grid;
+    grid-template:
+      "logo"
+      "banner"
+      "form";
+  }
+  .login-page-container .banner {
+    grid-area: banner;
+  }
+
+  /* Register page */
+  .register-page-container {
+    display: grid;
+    grid-template:
+      "logo"
+      "text"
+      "form"
+      "link";
+  }
+  .register-page-container .text {
+    grid-area: text;
+  }
+  .login-page-container,
+  .register-page-container .link {
+    grid-area: link;
+  }
+
+  /* Register and Login page */
+  .login-page-container,
+  .register-page-container .logo {
+    grid-area: logo;
+  }
+  .login-page-container,
+  .register-page-container .form {
+    grid-area: form;
+  }
+
+  @media (min-width: 768px) {
+    .login-page-container {
+      grid-auto-columns: 45% 50%;
+      grid-template:
+        "logo banner" 1fr
+        "form banner" auto
+        "link banner" 1fr;
+    }
+    .register-page-container {
+      grid-auto-columns: 45% 50%;
+      grid-template:
+        "logo form"
+        "text form"
+        "link form";
+    }
   }
 }

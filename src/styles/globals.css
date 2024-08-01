@@ -4,73 +4,87 @@
 
 textarea:focus,
 input:focus {
-  outline: none;
+	outline: none;
 }
 
 body {
-  background-color: #f0f0f5;
-}
-
-.container {
-  width: 100%;
-  padding: 0 5rem;
-  max-width: 1100px;
+	background-color: #f0f0f5;
 }
 
 @layer components {
-  /* Login page */
-  .login-page-container {
-    display: grid;
-    grid-template:
-      "logo"
-      "banner"
-      "form";
-  }
-  .login-page-container .banner {
-    grid-area: banner;
-  }
+	.container {
+		@apply w-full max-w-[1100px] px-20;
+	}
 
-  /* Register page */
-  .register-page-container {
-    display: grid;
-    grid-template:
-      "logo"
-      "text"
-      "form"
-      "link";
-  }
-  .register-page-container .text {
-    grid-area: text;
-  }
-  .login-page-container,
-  .register-page-container .link {
-    grid-area: link;
-  }
+	/* Grid names */
+	.grid-item-logo {
+		grid-area: logo;
+	}
+	.grid-item-text {
+		grid-area: text;
+	}
+	.grid-item-form {
+		grid-area: form;
+	}
+	.grid-item-banner {
+		grid-area: banner;
+	}
+	.grid-item-link {
+		grid-area: link;
+	}
+	.grid-item-banner {
+		grid-area: banner;
+	}
 
-  /* Register and Login page */
-  .login-page-container,
-  .register-page-container .logo {
-    grid-area: logo;
-  }
-  .login-page-container,
-  .register-page-container .form {
-    grid-area: form;
-  }
+	/* Login page */
+	.login-page-container {
+		display: grid;
+		grid-template:
+			"logo"
+			"banner"
+			"text"
+			"form"
+			"link" / 100%;
+	}
 
-  @media (min-width: 768px) {
-    .login-page-container {
-      grid-auto-columns: 45% 50%;
-      grid-template:
-        "logo banner" 1fr
-        "form banner" auto
-        "link banner" 1fr;
-    }
-    .register-page-container {
-      grid-auto-columns: 45% 50%;
-      grid-template:
-        "logo form"
-        "text form"
-        "link form";
-    }
-  }
+	/* Register page */
+	.register-page-container {
+		display: grid;
+		grid-template:
+			"logo"
+			"text"
+			"form"
+			"link" / 100%;
+	}
+
+	/* New incident page */
+	.new-incident-page-container {
+		display: grid;
+		grid-template:
+			"logo"
+			"text"
+			"form"
+			"link" / 100%;
+	}
+
+	@media (min-width: 768px) {
+		.login-page-container {
+			grid-template:
+				"logo banner" 1fr
+				"form banner" auto
+				"link banner" 1fr / 45% 50%;
+		}
+		.register-page-container {
+			grid-template:
+				"logo form" 1fr
+				"text form" auto
+				"link form" 1fr / 45% 50%;
+		}
+		.new-incident-page-container {
+			grid-template:
+				"logo form" 1fr
+				"text form" auto
+				"link form" 1fr / 45% 50%;
+		}
+	}
 }

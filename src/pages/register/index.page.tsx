@@ -6,73 +6,93 @@ import Link from "next/link";
 import Button from "@base/components/Button";
 import Input from "@base/components/Input";
 import Head from "next/head";
+import { Controller, useForm } from "react-hook-form";
+import { IFormInputs } from "./props";
 
 const Register: React.FC = () => {
-  // const history = useHistory();
+	const { control, handleSubmit } = useForm<IFormInputs>();
 
-  // async function handleRegister(e) {
-  //   e.preventDefault();
+	return (
+		<div className="w-screen min-h-screen flex justify-center">
+			<Head>
+				<title>Be The Hero - Cadastre sua ONG</title>
+			</Head>
 
-  //   try {
-  //     await api.post("/", { id });
+			<main className="container register-page-container py-10 justify-items-center md:justify-items-start md:justify-between">
+				<div className="grid-item-logo md:self-end">
+					<Image width={200} height={200} src="/logo.svg" alt="Be The Hero" />
+				</div>
 
-  //     //Inserir cookie
-  //     cookie.set("id", id);
+				<div className="grid-item-text text-center mt-8 mb-6 md:text-left">
+					<h1 className="text-2xl font-semibold">Cadastre-se</h1>
 
-  //     //Mudar de página
-  //     history.push("/profile");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+					<p className="text-black/80">
+						Faça seu cadastro, entre na plataforma e ajude pessoas a<br />
+						encontrarem os casos da sua ONG.
+					</p>
+				</div>
 
-  return (
-    <div className="w-screen h-screen flex justify-center">
-      <Head>
-        <title>Be The Hero</title>
-      </Head>
+				<form
+					className="grid-item-form w-full flex flex-col mb-2.5 md:self-center"
+					onSubmit={() => {}}
+				>
+					<Controller
+						control={control}
+						name="name"
+						render={({ field }) => (
+							<Input className="mb-2.5" placeholder="Nome" {...{ ...field }} />
+						)}
+					/>
 
-      {/* <main className="container register-page-container justify-items-center items-center md:justify-items-start md:justify-between"> */}
-      <main className="container register-page-container self-center justify-items-center md:justify-items-start md:justify-between md:items-center">
-        <div className="logo">
-          <Image width={250} height={200} src="/logo.svg" alt="Be The Hero" />
-        </div>
+					<Controller
+						control={control}
+						name="email"
+						render={({ field }) => (
+							<Input className="mb-2.5" placeholder="Email" />
+						)}
+					/>
 
-        <div className="text text-center mt-8 mb-6 md:text-left">
-          <h1 className="text-2xl font-semibold">Cadastre-se</h1>
+					<Controller
+						control={control}
+						name="whatsapp"
+						render={({ field }) => (
+							<Input className="mb-2.5" placeholder="Whatsapp" />
+						)}
+					/>
 
-          <p className="text-black/80">
-            Faça seu cadastro, entre na plataforma e ajude pessoas a<br />
-            encontrarem os casos da sua ONG.
-          </p>
-        </div>
+					<div className="grid grid-cols-[60%,39%] justify-between">
+						<Controller
+							control={control}
+							name="city"
+							render={({ field }) => (
+								<Input className="mb-2.5" placeholder="Cidade" />
+							)}
+						/>
 
-        <form
-          className="form flex flex-col w-3/4 mb-2.5 md:w-full"
-          onSubmit={() => {}}
-        >
-          <Input className="mb-2.5" placeholder="Nome" />
-          <Input className="mb-2.5" placeholder="Email" />
-          <Input className="mb-2.5" placeholder="Whatsapp" />
+						<Controller
+							control={control}
+							name="uf"
+							render={({ field }) => (
+								<Input className="mb-2.5" placeholder="UF" />
+							)}
+						/>
+					</div>
 
-          <div className="grid grid-cols-[60%,1fr] gap-2">
-            <Input className="mb-2.5" placeholder="Cidade" />
-            <Input className="mb-2.5" placeholder="UF" />
-          </div>
+					<Button type="submit" text="Cadastrar" />
+				</form>
 
-          <Button type="submit" text="Cadastrar" />
-        </form>
-
-        <div className="link">
-          <Link href="/" className="mt-2 flex items-center">
-            <IoEnterOutline className="text-primary" size={26} />
-            <span className="ml-2.5 font-medium transition-opacity hover:opacity-80">
-              Já tenho cadastro
-            </span>
-          </Link>
-        </div>
-      </main>
-    </div>
-  );
+				<Link
+					href="/"
+					className="grid-item-link flex items-center mt-2 md:self-start"
+				>
+					<IoEnterOutline className="text-primary" size={26} />
+					<span className="ml-2.5 font-medium transition-opacity hover:opacity-70">
+						Já tenho cadastro
+					</span>
+				</Link>
+			</main>
+		</div>
+	);
 };
+
 export default Register;
